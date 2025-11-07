@@ -17,8 +17,19 @@ public class Movement : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            yield return new WaitForSeconds(1);
-            transform.position = positions[i].position;
+            yield return new WaitForSeconds(.2f);
+           
+            //to check how much distance is remaining -> a magnitude 
+            // simply toward complicated vector 3 each axis. 
+            
+            // (float)Vector3.Distance(vector3,vector3)
+
+           
+            while (Vector3.Distance(transform.position, positions[i].position)>.1f)
+            {
+                transform.position = Vector3.MoveTowards(transform.position,positions[i].position,speed*Time.deltaTime);
+                yield return null; // 
+            }
             if (i == 3)
             {
                 i = -1;
